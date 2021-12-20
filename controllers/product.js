@@ -102,24 +102,50 @@ exports.updateProduct = async (req, res, next) => {
       },
     });
     if (isCategoryExists) {
-      const product = await Product.update(
-        {
+      let isValid;
+      const isExists = await Product.findOne({
+        //Check if Product with this name already exists
+        where: {
           name: updatedName,
-          price: updatedPrice,
-          description: updatedDescription,
-          categoryId: updatedCategoryId,
         },
-        {
-          where: {
-            id: id,
-          },
+      });
+      if (isExists) {
+        if (isExists.id === +id) {
+          isValid = true;
+        } else {
+          isValid = false;
         }
-      );
-      res.json({ id: id, message: "Product Updated." });
+      } else {
+        isValid = true;
+      }
+      if (!isValid) {
+        res.status(409).json({
+          message:
+            "Product with this name already exists, Only unique product name accepted.",
+        });
+      } else {
+        const product = await Product.update(
+          {
+            name: updatedName,
+            price: updatedPrice,
+            description: updatedDescription,
+            categoryId: updatedCategoryId,
+          },
+          {
+            where: {
+              id: id,
+            },
+          }
+        );
+        product[0]
+          ? res.json({ id: id, message: "Product Updated." })
+          : res.status(400).json({ message: "Invalid Product ID." });
+      }
     } else {
       res.status(400).json({ message: "Invalid Category ID." });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal Server Error." });
   }
 };
