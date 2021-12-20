@@ -1,0 +1,23 @@
+{
+  "name": "trootech-practical-task",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "migration": "npx sequelize-cli db:migrate",
+    "undoMigration": "npx sequelize-cli db:migrate:undo",
+    "seeds": "npx sequelize-cli db:seed:all",
+    "undoSeeds": "npx sequelize-cli db:seed:undo:all"
+  },
+  "author": "Anshul Jain",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0"
+  }
+}
