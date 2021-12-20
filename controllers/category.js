@@ -47,7 +47,7 @@ exports.createCategory = async (req, res, next) => {
     const isExists = await Category.findOne({
       //Check if Category already exists
       where: {
-        name: updatedName,
+        name: name,
       },
     });
     if (isExists) {
