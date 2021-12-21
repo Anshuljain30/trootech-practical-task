@@ -77,6 +77,32 @@ npm run undoMigration
 
 ```
 - once started you can visit [http://localhost:8000](http://localhost:8000) 8000 is default port.
+
+
+
+# API Endpoints
+
+  
+
+Use Postman</br>
+
+Use Header => Content-Type: application/json</br>
+**Route for Category -**
+localhost:8000/category/</br>
+**Route for Product -**
+localhost:8000/product/</br>
+
+
+
+| Endpoint     | Method | Payload                                                                                                                                                                                                                        | Response                      | Requirements                                                           | Description                                                                                            |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| /category | GET   | | Array of Categories |      | Get All Categories                                                                                        |
+| /category/:Id  | GET   | params : `userId` | Get details of Category having ID=:Id || Get Category with particular ID|
+| /category       |POST| {</br>&emsp;"name":"Mobile"</br>} | {</br>&emsp;"id":"6",</br>&emsp;"message":"Category_Created."</br>}          | Category name must be unique. | Creates new category |
+| /category/:Id | PUT    | params : `Id`</br>{</br>&emsp;"name":"Laptops"</br>}| {</br>&emsp;"id":"6",</br>&emsp;"message":"Category_Updated."</br>}          | `category` must not be exist with other Id | Updates the Category name |
+| /category/:Id | DELETE   | params : `Id`| {</br>&emsp;"message":"UserDeleted"</br>} |      ||
+
+
   
 # Author
 Anshul Jain
